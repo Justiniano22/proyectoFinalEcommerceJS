@@ -1,0 +1,129 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* HEADER */
+header{
+    width: 100%;
+    background-color: aquamarine;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.navHeader{
+    display: flex;
+    justify-content: space-between;
+    width: 75vw;
+}
+
+.listaNav{
+    text-decoration: none;
+    list-style: none;
+    display: flex;
+    gap: 75px;
+    width: 100%;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+/* -------------------------------------------- */
+
+
+
+/* MAIN */
+
+/* SECTION HOME INICIO */
+.sectionHome{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contenedorImagenSectionHome{
+    /* margin: 50px 50px 50px 50px; */
+    background-color: blueviolet;
+    width: 75vw;
+    height: 50vh;
+}
+
+/* --------------------------------------- */
+
+/* SECTION MENU STORE */
+
+.sectionMenuStore{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.contenedorCategoriasStore{
+    display: flex;
+    justify-content: space-evenly;
+
+    background-color: rgb(43, 226, 195);
+    width: 75vw;
+    height: 50vh;
+}
+.cardCategoria{
+    max-height: 250px;
+    width: 260px;
+    margin-top: 15px;
+    background-color: white;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.cardCategoria img{
+    width: 100%;
+    height: 85%;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+.contenedorProductosPopulares{
+    display: flex;
+    justify-content: space-evenly;
+    background-color: rgb(43, 226, 195);
+    width: 75vw;
+    height: 50vh; 
+}
+
+.cardProductoPopular{
+    display: flex;
+    flex-direction: column;
+    max-height: 300px;
+    width: 200px;
+    background-color: blanchedalmond;
+}
+
+.cardProductoPopular div{
+    height: 100%;
+    width: auto;
+    background-color: aqua;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.cardProductoPopular img{
+    width: 100%;
+    height: 85%;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+/* ------------------------------------------- */
+
+
+
+
+
+
+
+
+
+/* ---------------------------------------------------- */
