@@ -3,56 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="./styles.css">
     <title>Document</title>
 </head>
 <body>
+
+
     <header>
-        <nav class="navHeader">
-            <h2>Ecommerce</h2>
+        <button id="btnAbrirMenuHamburguesa" class="abrirMenu"><i class="bi bi-list"></i></button>
+        <h2>Ecommerce</h2>
+        <nav id="navId" class="navHeader nav">
+            <button id="btnCerrarMenuHamburguesa" class="btnCerrarHamburguer"><i class="bi bi-x"></i></button>
+
+            
             <ul class="listaNav">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Shop</a></li>
+                <li><a href="#sectionHome">Home</a></li>
+                <li><a href="#sectionShop">Shop</a></li>
                 <li><a href="#">About</a></li>
                 <li><a href="#">Contact</a></li>
             </ul>
-            <form id="formularioHeader" action="submit">
-                <input id="inputSearch" type="text" placeholder="Ingrese busqueda" required>
-                <button id="btnSearch" type="submit">Buscar</button>
-            </form>
-            <button>CARRITO</button>
         </nav>
-
+        <form id="formularioHeader" class="formularioHeader" action="submit">
+                <input id="inputSearch" class="inputBusqueda" type="text" name="name" placeholder="Ingrese su busqueda" required>
+                <button id="btnSearch" class="btnBusqueda" type="submit"><i class="bi bi-search"></i></button>
+        </form>
+        <button id="btnMostrarCarrito" class="bntCarrito"><i class="bi bi-cart"></i></button>
     </header>
-    <main>
-        <section class="sectionHome">
 
+
+    <main>
+        
+        <section id="sectionHome" class="sectionHome">
+            <div id="result" class="mostrarResultadoBusqueda"></div>
             <div class="contenedorImagenSectionHome">
                 <aside>
-                    <p>DISCOVER AMAZING PRODUCTS</p>
+                    <p>DISCOVER</p>
+                    <p>AMAZING</p>
+                    <p>PRODUCTS</p>
                     <button>Shop Now</button>
                 </aside>
             </div>
         </section>
 
+        <article class="articleCarrito">
+            <div id="carrito-container" class="carritoContainer">
+                <button id="btnCerrarCarrito" class="btnCerrarCarrito">X</button>
+                <div class="">
+                    <h2 class="">Tu Carrito</h2>
+                </div>
+                <form id="cupon-form" class="">
+                    <!-- <input
+                    type="text"
+                    disabled
+                    id="cupon-input"
+                    placeholder="Ingrese el cupon"
+                    class=""
+                    />
+                    <button
+                    type="submit"
+                    id="aplicar-cupon"
+                    class=""
+                    > 
+                    Aplicar cupón
+                    </button>-->
+                </form>
+                <div class="carrito-body" id="carrito-body"></div>
+                <div class="">
+                    <p id="carrito-total">Total: $0</p>
+                </div>
+                <button
+                    id="finalizar-compra"
+                    class=""
+                >
+                    Finalizar Compra
+                </button>
+            </div>
+        </article>
+
         
-        <section class="sectionMenuStore">
-            <!-- <h2>Categories</h2> -->
+        
+        <section id="sectionShop" class="sectionMenuStore">
+            <h2>Categories</h2>
             <div class="contenedorCategoriasStore">
                 <div class="cardCategoria">
-                    <img src="./media/Luffy4.png" alt="FOTO CATEGORIA">
-                    <h3>Clothing</h3>
+                    <a href="#"><img src="./media/Luffy4.png" alt="FOTO CATEGORIA FIGURAS"></a>
+                    <h3>Figuras</h3>
                 </div>
                 <div class="cardCategoria">
-                    <img src="./media/Luffy4.png" alt="FOTO CATEGORIA">
-                    <h3>Accesories</h3>
+                    <a href="#"><img src="./media/Luffy4.png" alt="FOTO CATEGORIA MANGA"></a>
+                    <h3>Manga</h3>
                 </div>
                 <div class="cardCategoria">
-                    <img src="./media/Luffy4.png" alt="FOTO CATEGORIA">
-                    <h3>Electronics</h3>                    
+                    <a href="#"><img src="./media/Luffy4.png" alt="FOTO CATEGORIA ANIME"></a>
+                    <h3>Anime</h3>                    
                 </div>
             </div>
 
+            <h2>Productos Populares</h2>
             <div id="contenedorProductosPops" class="contenedorProductosPopulares">
 
                 <!-- <div class="cardProductoPopular">                   
