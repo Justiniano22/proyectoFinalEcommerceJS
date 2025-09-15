@@ -1,9 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Mozilla+Headline:wght@200..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+/* ESTILO GENERALES */
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 
+h1, h2, h3, p{
+    font-family: "Mozilla Headline", sans-serif;
+}
+
+h2{
+    font-size: 3rem;
+}
+
+a{
+    text-decoration: none;
+    list-style: none;
+}
+
+section{
+    
+}
+
+button{
+    padding: 5px;
+    background-color: #2563EB;
+    color: white;
+    border: solid #2563EB;
+    border-radius: 7px;
+    cursor: pointer;
+    transition-duration: 0.3s; 
+}
+
+button:hover{
+    background-color: rebeccapurple;
+    transition-duration: 0.5s; 
+    /* transition-property:background-color;  */
+}
+
+
+/* ---------------------------------------------- */
 
 /* HEADER */
 header{
@@ -12,11 +52,26 @@ header{
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 5px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
+
+.abrirMenu, .btnCerrarHamburguer{
+    display: none;
+}
+
+.nav.visible{
+    opacity: 1;
+    visibility: visible;
+}
+
 .navHeader{
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    width: 75vw;
+    width: 85vw;
 }
 
 .listaNav{
@@ -25,28 +80,167 @@ header{
     display: flex;
     gap: 75px;
     width: 100%;
+    align-items: center;
     justify-content: center;
     font-size: 1.5rem;
 }
 
+.formularioHeader{
+    display: flex;
+    margin-right: 20px;
+    border: none;
+    background-color: white;
+    border-radius: 10px;
+    height: 4vh;
+}
+
+.inputBusqueda{
+    border: 0;
+    padding: 3px;
+    border-radius: 10px;
+    width: 30vh;
+}
+
+.btnBusqueda{
+    background-color: transparent;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: black;
+}
+
+.btnBusqueda:hover{
+    color: green;
+}
+
+.mostrarResultadoBusqueda{
+    width: 75vw;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 25px;
+    display: none;
+}
+
+.cardProductoBuscado{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    /* max-height: 250px; */
+    width: 260px;
+    /* margin-top: 15px; */
+    background-color: rgb(226, 237, 31);
+    text-align: center;
+    border-radius: 10px;
+}
+
+.imgCardProductoBuscado{
+    width: 35%;
+    height: 50%;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px; 
+}
+
+.containerComponentesCard{
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;    
+}
+
+
+.containerBotonesCard{
+    display: flex;
+    gap: 15px;
+    height: auto;
+}
+
+.containerBotonesCard button{
+    background-color: cornflowerblue;
+    border-radius: 5px;
+    border: 2px solid cornflowerblue;
+    cursor: pointer;
+    padding: 2px;
+}
+
+
 /* -------------------------------------------- */
 
 
+/* MOSTRAR RESULTADO DE BUSQUEDA */
+.mostrarResultadoBusqueda{
+
+}
+/* ------------------------------------------------------ */
+
+/* CARRITO DE COMPRAS */
+.articleCarrito{
+    position: sticky;
+    top: 564px;
+    z-index: 1100;
+}    
+.carritoContainer{
+    position: absolute;
+    top: -564px;
+    right: 0;
+    width: 12vw;
+    min-height: 100vh;
+    border: 2px solid black;
+    display: none;
+    background-color: beige;
+    /* overflow: scroll; */
+
+    z-index: 1100;
+}
+
+.bntCarrito{
+    width: 50px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.6rem;
+}
+
+.btnCerrarCarrito{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 25px;
+    background-color: transparent;
+    cursor: pointer;
+}
+/* ----------------------------------------------------------------------------------- */
 
 /* MAIN */
 
 /* SECTION HOME INICIO */
 .sectionHome{
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
 .contenedorImagenSectionHome{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 15px;
     /* margin: 50px 50px 50px 50px; */
-    background-color: blueviolet;
-    width: 75vw;
+    background-image: url('./media/fondoHomeDbz.jpg');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    width: 100%;
     height: 50vh;
+}
+
+.contenedorImagenSectionHome aside p{
+    font-size: 3rem;
 }
 
 /* --------------------------------------- */
@@ -58,14 +252,14 @@ header{
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-top: 50px;
 }
 .contenedorCategoriasStore{
-    display: flex;
-    justify-content: space-evenly;
-
-    background-color: rgb(43, 226, 195);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    justify-items: center;
     width: 75vw;
-    height: 50vh;
+    min-height: 50vh;
 }
 .cardCategoria{
     max-height: 250px;
@@ -74,6 +268,7 @@ header{
     background-color: white;
     text-align: center;
     border-radius: 10px;
+    border: 2px solid gainsboro;
 }
 
 .cardCategoria img{
@@ -81,22 +276,26 @@ header{
     height: 85%;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
+    border-bottom: 2px solid gainsboro;
 }
 
 .contenedorProductosPopulares{
-    display: flex;
-    justify-content: space-evenly;
-    background-color: rgb(43, 226, 195);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    justify-items: center;
     width: 75vw;
-    height: 50vh; 
+    min-height: 50vh; 
 }
 
 .cardProductoPopular{
     display: flex;
     flex-direction: column;
-    max-height: 300px;
+    height: 400px;
     width: 200px;
-    background-color: blanchedalmond;
+    margin-top: 15px;
+    background-color: gainsboro;
+    border-radius: 10px;
+    border: 2px solid rgb(185, 179, 179);
 }
 
 .cardProductoPopular div{
@@ -108,11 +307,13 @@ header{
     justify-content: center;
     align-items: center;
     gap: 5px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
 }
 
 .cardProductoPopular img{
     width: 100%;
-    height: 85%;
+    height: 65%;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
 }
@@ -127,3 +328,132 @@ header{
 
 
 /* ---------------------------------------------------- */
+
+
+
+
+.color{
+    color: blueviolet;
+    font-size: 3rem;
+}
+
+
+
+
+
+
+@media (width = 430px) and (height = 932px) {
+
+    h2{
+        font-size: 1.5rem;
+    }
+
+    header{
+        justify-content: space-between;
+    }
+
+    header h2{
+        display: none;
+    }
+
+    .navHeader{
+        justify-content: center;
+        width: auto;
+    }
+    
+    .abrirMenu{
+        position: sticky;
+        top: 15px;
+        right: 15px;
+    }
+
+    .nav{
+        opacity: 0;
+        visibility: hidden;
+
+        display: flex;
+        align-items: flex-start;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: burlywood;
+        width: 15vh;
+        height: 110vh;
+        padding-left: 10px;
+        /* padding: 2rem; */
+        transition-duration:0.5s ;
+    }
+
+    .formularioHeader{
+        margin-right: 0;
+    }
+
+    .abrirMenu, .btnCerrarHamburguer{
+        display: block;
+        border: 0;
+        font-size: 2rem;
+        background-color: transparent;
+        color: black;
+    }
+
+    .btnCerrarHamburguer{
+        position: absolute;
+        top: 0px;
+        right: 0px;
+    }
+
+    .listaNav{
+        gap: 20px;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 30px;
+    }
+
+
+    .articleCarrito{
+        position: sticky;
+        top: 220px;
+        z-index: 1100;
+    }
+        
+    .carritoContainer{
+        position: absolute;
+        top: -220px;
+        right: 0;
+        
+        min-height: 100vh;
+        border: 2px solid black;
+        display: none;
+        background-color: beige;
+        
+        width: 25vh;
+        z-index: 1100;
+        padding: 25px;
+    }
+
+/* .bntCarrito{
+    width: 50px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.6rem;
+} */
+
+.btnCerrarCarrito{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 25px;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+
+    .contenedorImagenSectionHome{
+        height: auto;
+    }
+
+    .contenedorImagenSectionHome aside p{
+        font-size: 1.7rem;
+    }
+}
