@@ -1,56 +1,28 @@
-fetch('https://dragonball-api.com/api/characters?page=6&limit=4')
-    .then(response => response.json())
-    .then(data => console.log(data));
-
-
-
-const BASE_API = "https://dragonball-api.com/api";
-const ENDPOINTS = Object.freeze({
+const API = "https://dragonball-api.com/api";
+const FILTRO = Object.freeze({
     characters: "characters",
-    planets: "planets",
-    transformation: "transformation",
 });
 
 const formularioHeader = document.getElementById('formularioHeader');
 const inputSearch = document.getElementById('inputSearch');
 const btnSearch = document.getElementById('btnSearch');
 const mostrarResultado = document.getElementById('result');
-
 const contenedorProductosPops = document.getElementById('contenedorProductosPops');
 
 
-
-async function Bring() {
+// TRAIGO DESDE LA API 4 ELEMENTOS QUE LOS UTILIZO COMO PRODUCTOS POPULARES
+async function traerProductosPopulares() {
     const page = Math.floor(Math.random() * (10 - 1 + 1)) + 1;
     console.log('random ' + page);
 
     fetch(`https://dragonball-api.com/api/characters?page=${page}&limit=4`)
         .then(response => {
-            // Check if the request was successful (status code in the 200s)
             if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
             }
-            // Parse the response body as JSON
             return response.json();
         })
-        // .then(data => {
-        //     // Process the retrieved data
-        //     console.log(data.items);
-        //     data.items.forEach(element => {
-        //         let containerElement = document.createElement('div');
-        //         let nameElement = document.createElement('h2');
-        //         nameElement.className += 'text-center font-bold text-2xl';
-        //         containerElement.className += 'w-100 h-100 bg-blue-300 place-self-center m-4 bg-contain bg-no-repeat bg-center';
-        //         containerElement.style.backgroundImage = `url(\'${element.image}\')`;
-        //         nameElement.innerHTML = element.name;
-        //         displayRandom.append(containerElement);
-        //         displayRandom.append(nameElement);
-        //         containerElement.dataset.id = element.id;
-        //         containerElement.addEventListener('click', DebugInfo)
-        //     });
-        // })
         .then(data => {
-            // Process the retrieved data
             console.log(data.items);
             data.items.forEach(personaje => {
                 let precio = personaje.ki;
@@ -67,7 +39,7 @@ async function Bring() {
                         <p>$${precio}</p>
                         <button class="btnAgregarCarrito" 
                             data-nombre="${personaje.name}" 
-                            data-precio="${personaje.ki || 0}">
+                            data-precio="${precio || 0}">
                             Add to cart
                         </button>     
                     </div>
@@ -75,26 +47,19 @@ async function Bring() {
                 `;
                 contenedorProductosPops.innerHTML += newContent;
             });
-
-            
         })
         .catch(error => {
-            // Handle any errors during the fetch operation
             console.error('Error fetching data:', error);
         });
 }
+//-----------------------------------------------------------------------------------------------
 
 
 
 
 
-formularioHeader.addEventListener('submit', (event) => {
-    event.preventDefault();
-    Search(inputSearch.value);
-})
 
-
-
+// MANEJO LOS BOTONES DEL MENU HAMBUERGUESA
 const btnAbrirMenuHamburguesa = document.getElementById('btnAbrirMenuHamburguesa');
 const btnCerrarMenuHamburguesa = document.getElementById('btnCerrarMenuHamburguesa');
 const navId = document.getElementById('navId'); 
@@ -106,47 +71,11 @@ btnAbrirMenuHamburguesa.addEventListener('click', ()=>{
 btnCerrarMenuHamburguesa.addEventListener('click', ()=>{
     navId.classList.remove('visible');
 })
+//---------------------------------------------------------------------------------------------------------------------
 
 
 
-// async function Search(name) {
-//     fetch(`https://dragonball-api.com/api/characters?name=${name}&limit=1`)
-//         .then(response => {
-//             // Check if the request was successful (status code in the 200s)
-//             if (!response.ok) {
-//             throw new Error(`HTTP error! status: ${response.status}`);
-//             }
-//             // Parse the response body as JSON
-//             return response.json();
-//         })
-//         .then(data => {
-//             // Process the retrieved data
-//             console.log(data);
-//             console.log(data[0].image);
-//             console.log(data[0].name)
-//             // container.style.backgroundImage = `url(\'${data[0].image}\')`;
-//             // label.innerHTML = data[0].name;
-//             // container.dataset.id = data[0].id;
-//             // container.addEventListener('click', DebugInfo)
-
-//             // container.classList.remove('hidden');
-//             // label.classList.remove('hidden');
-
-//             // displayRandom.classList.add('hidden');
-//         })
-//         .catch(error => {
-//             // Handle any errors during the fetch operation
-//             console.error('Error fetching data:', error);
-//         });
-// }
-
-
-
-
-
-
-
-function generateQueryString(filters) {
+function generarStringQuery(filters) {
     if (!filters) return "";
 
     let queryString = '?';
@@ -162,14 +91,14 @@ function generateQueryString(filters) {
     return queryString;
 }
 
-function generateQueryUrl(path, filters) {
-    const queryString = generateQueryString(filters);
+function generarUrl(path, filters) {
+    const queryString = generarStringQuery(filters);
 
-    return `${BASE_API}/${path}${queryString}`;
+    return `${API}/${path}${queryString}`;
 }
 
 async function fetchData(path, filters) {
-    const query = generateQueryUrl(path, filters);
+    const query = generarUrl(path, filters);
 
     return await fetch(query, {
         method: 'GET', headers: {
@@ -184,39 +113,11 @@ async function fetchData(path, filters) {
     });
 }
 
-// function populateHome(data) {
-//     mostrarResultado.innerHTML = null;
 
-//     if (data.items.length < 1) {
-//         mostrarResultado.innerHTML = "No se encontro data";
-//         alert('Lo siento, no pudimos encontrar información acerca de tu busqueda.')
-//         return;
-//     }
-
-//     for (const item of data.items) {
-//         // mostrarResultado.innerHTML += `<a href="detalleProducto.html?id=${item.id}"><p>${item.name}</p> <p class="color">${item.name}</p> </a>`;
-//         mostrarResultado.innerHTML += `
-//                 <div class="cardProductoBuscado">                   
-//                     <img class="imgCardProductoBuscado" src="${item.image}" alt="">
-//                     <div>
-//                         <h3 id="nombreProducto">${item.name}</h3>
-//                         <p id="precioProducto">$${item.ki}</p>
-//                         <button><a href="detalleProducto.html?id=${item.id}">Detalles</a></button>
-//                         <button id="btnAgregarCarrito">Add to cart</button>
-//                     </div>
-//                 </div>
-//                 `;
-//     }
-// }
-
-async function onLoad() {
-    const characters = await fetchData(ENDPOINTS.characters);
-
-    populateHome(characters);
-}
-
+//SE REALIZA EL FILTRADO DE PRODUCTOS
 
 async function onSubmit(event) {
+    
     mostrarResultado.classList.add('mostrarResultadoBusqueda');
     mostrarResultado.style.display = 'block';
     mostrarResultado.style.display = 'flex';
@@ -224,7 +125,7 @@ async function onSubmit(event) {
     const formData = new FormData(formularioHeader);
     const filterList = Object.fromEntries(formData.entries());
     try {
-        const characterData = await fetchData(ENDPOINTS.characters, filterList);
+        const characterData = await fetchData(FILTRO.characters, filterList);
         populateHome({items: characterData});
     } catch (error) {
         mostrarResultado.innerHTML = "Hubo un error inesperado";
@@ -232,49 +133,75 @@ async function onSubmit(event) {
     }
 }
 
-// addEventListener('load', onLoad);
 formularioHeader.addEventListener('submit', onSubmit);
+//---------------------------------------------------------------------------------------------------------------
 
 
 
+// SE REALIZA LA PETICIÓN POST PARA 'SUBIR' UN PRODUCTO Y SER MOSTRADO, SE UTILIZA LA API DE JSONPLACEHOLDER YA QUE PERMITE REALIZAR EL METODO POST
 
+const productoForm = document.getElementById('productoForm');
 
+productoForm.addEventListener('submit', function(event) {
+    event.preventDefault(); 
 
+    const productoName = document.getElementById('productoName').value;
+    const productoDesc = document.getElementById('productoDesc').value;
+    const productoPrice = document.getElementById('productoPrice').value;
+    const productoImage = document.getElementById('productoImage').value;
 
+    const newProduct = {
+        name: productoName,
+        description: productoDesc,
+        price: productoPrice,
+        image: productoImage,
+        category: 'producto' 
+    };
 
+    console.log(newProduct);
 
+    fetch('https://jsonplaceholder.typicode.com/posts', {
+        method: 'POST',
+        body: JSON.stringify(newProduct),
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+        },
+        })
+        .then(response => response.json()) 
+            .then(producto => {
 
+            console.log('Producto creado exitosamente:', producto);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-// FUNCIONES PARA EL CARRITO
+            const container = document.getElementById('contenedorProductoCreado');
+            const productCard = document.createElement('div');
+            productCard.classList.add('cardProductoCreado');
+            container.style.display = 'flex';
+            container.innerHTML = "";
+            productCard.innerHTML = `
+                <img src="${producto.image}" alt="${producto.name}">
+                <div>
+                    <h3>${producto.name}</h3>
+                    <p>${producto.description}</p>
+                    <p>Precio: ${producto.price}</p>
+                    
+                </div>`;
+            container.appendChild(productCard);
+            })
+            .catch(error => {
+            console.error('Error al crear el producto:', error);
+    });
+});
+//--------------------------------------------------------------------------------------------------------
 
 
 // --- VARIABLES ---
-// const mostrarResultado = document.getElementById('result');
-// const contenedorProductosPops = document.getElementById('contenedorProductosPops');
 const carritoBody2 = document.getElementById("carrito-body");
 const precioTotal = document.getElementById('carrito-total');
-// const formularioHeader = document.getElementById('formularioHeader');
-// const inputSearch = document.getElementById('inputSearch');
-
 const btnMostrarCarrito = document.getElementById('btnMostrarCarrito');
 const btnCerrarCarrito = document.getElementById('btnCerrarCarrito');
 const carritoContainer = document.getElementById('carrito-container');
 
-//MANEJO DE MOSTRAR U OCULTAR EL CARRITO DE COMPRAS
-
+// PERMITEN MOSTRAR U OCULTAR EL CARRITO DE COMPRAS
 btnMostrarCarrito.addEventListener('click', ()=>{
     carritoContainer.style.display = 'block';
 })
@@ -282,73 +209,84 @@ btnMostrarCarrito.addEventListener('click', ()=>{
 btnCerrarCarrito.addEventListener('click', ()=>{
     carritoContainer.style.display = 'none';
 })
+//---------------------------------------------------------------------------------------------------------------------
 
-// Cargar productos previos si existen
-let productosGuardados = JSON.parse(localStorage.getItem("productosGallery")) || [];
+// REVISA Y CARGA SI HAY DATOS PREEXISTENTES
+let productosGuardados = JSON.parse(localStorage.getItem("productosDragonBall")) || [];
+//---------------------------------------------------------------------------------------------------------------------
 
-// --- FUNCION PARA AGREGAR AL CARRITO ---
-function agregarAlCarrito(nombre, precio) {
+// FUNCIÓN PARA AGREGAR PRODUCTO AL CARRITO 
+function agregarAlCarrito(nombre, precio) {0
+    let productosGuardados = JSON.parse(localStorage.getItem("productosDragonBall")) || [];
     const nuevoProducto = {
-        id: Date.now(), // id único
+        id: Date.now(),
         nombre: nombre,
         precio: precio
     };
 
     productosGuardados.push(nuevoProducto);
-    localStorage.setItem("productosGallery", JSON.stringify(productosGuardados));
+    localStorage.setItem("productosDragonBall", JSON.stringify(productosGuardados));
     renderizarCarrito();
 }
+//---------------------------------------------------------------------------------------------------------------------
 
-// --- FUNCION PARA MOSTRAR EL CARRITO ---
+// FUNCIÓN PARA MOSTRAR EL PRODUCTO EN EL CARRITO 
 function renderizarCarrito() {
+    let productosGuardados = JSON.parse(localStorage.getItem("productosDragonBall")) || [];
     carritoBody2.innerHTML = '';
     let precioInicial = 0;
 
-    productosGuardados.forEach(producto => {
+    productosGuardados.forEach(personaje => {
         const productoDiv = document.createElement('div');
-        const carritoEliminarStorage = document.createElement('button');
+        const btnEliminarProCarrito = document.createElement('button');
 
-        precioInicial += parseInt(producto.precio);
+        precioInicial += parseInt(personaje.precio);
 
-        productoDiv.textContent = `${producto.nombre} - $${producto.precio}`;
-        carritoEliminarStorage.textContent = 'X';
-        carritoEliminarStorage.style.cursor = 'pointer';
+        productoDiv.textContent = `${personaje.nombre} - $${personaje.precio}`;
+        btnEliminarProCarrito.textContent = 'X';
+        btnEliminarProCarrito.style.cursor = 'pointer';
 
         productoDiv.style.display = 'flex';
         productoDiv.style.justifyContent = 'space-between';
         productoDiv.style.gap = '30px';
         productoDiv.style.marginRight = '5px';
         productoDiv.style.marginBottom = '5px';
-        // productoDiv.style.justifyContent = "space-between";
 
-        productoDiv.append(carritoEliminarStorage);
+        productoDiv.append(btnEliminarProCarrito);
         carritoBody2.append(productoDiv);
 
-        // Eliminar producto del carrito
-        carritoEliminarStorage.addEventListener('click', () => {
-            productosGuardados = productosGuardados.filter(p => p.id !== producto.id);
-            localStorage.setItem("productosGallery", JSON.stringify(productosGuardados));
+        // ELIMINO PRODUCTO DEL CARRITO (DE MANERA INDIVIDUAL)
+        btnEliminarProCarrito.addEventListener('click', () => {
+            productosGuardados = productosGuardados.filter(p => p.id !== personaje.id);
+            localStorage.setItem("productosDragonBall", JSON.stringify(productosGuardados));
             renderizarCarrito();
         });
     });
 
     precioTotal.textContent = `Total: $${precioInicial}`;
 }
+//---------------------------------------------------------------------------------------------------------------------
 
-// --- CREAR CARD DE PRODUCTO ---
-function crearCard(personaje) {
+// SE CREA LA CARD DEL PRODUCTO BUSCADO
+function cardProductoBuscado(personaje) {
+    let precio = personaje.ki;
+        if(precio == 0){
+            precio = 1
+        } else {
+            precio = personaje.ki
+    }
     return `
         <div class="cardProductoBuscado">                   
             <img class="imgCardProductoBuscado" src="${personaje.image}" alt="">
             <div class="containerComponentesCard">
                 <h3>${personaje.name}</h3>
-                <p>$${personaje.ki || 0}</p>
+                <p>$${precio || 0}</p>
 
                 <div class="containerBotonesCard">
-                    <button><a href="./apartadoDetalle/detalleProducto.html?id=${personaje.id}">Detalles</a></button>
+                    <button><a href="./apartadoDetalle/detalleProducto.html?id=${personaje.id}" target="_blank">Detalles</a></button>
                     <button class="btnAgregarCarrito" 
                             data-nombre="${personaje.name}" 
-                            data-precio="${personaje.ki || 0}">
+                            data-precio="${precio || 0}">
                             Add to cart
                     </button>                
                 </div>
@@ -356,39 +294,47 @@ function crearCard(personaje) {
         </div>
     `;
 }
+//---------------------------------------------------------------------------------------------------------------------
 
-// --- MOSTRAR RESULTADOS DE BUSQUEDA ---
+// FUNCIÓN DONDE SE MUESTRAN LOS RESULTADOS DE LA BUSQUEDA LLAMANDO A CARDPRODUCTOBUSCADO PARA CREAR LAS CARDS
 function populateHome(data) {
     mostrarResultado.innerHTML = "";
 
     if (data.items.length < 1) {
-        mostrarResultado.innerHTML = "No se encontró nada 😢";
+        mostrarResultado.innerHTML = "La busqueda no ha encontrado resultados :(";
         return;
     }
-
+    
     for (const item of data.items) {
-        mostrarResultado.innerHTML += crearCard(item);
+        mostrarResultado.innerHTML += cardProductoBuscado(item);
     }
-}
 
-// --- FUNCION DE BUSQUEDA ---
-async function Search(name) {
+}
+//---------------------------------------------------------------------------------------------------------------------
+
+// FUNCIÓN DONDE SE REALIZA LA BUSQUEDA 
+async function busquedaProducto(name) {
     fetch(`https://dragonball-api.com/api/characters?name=${name}&limit=1`)
         .then(response => response.json())
         .then(data => {
-            // la API devuelve un array, lo convertimos a { items: [...] }
             populateHome({ items: data });
         })
         .catch(error => console.error("Error en búsqueda:", error));
 }
+//---------------------------------------------------------------------------------------------------------------------
 
-// --- EVENTO FORMULARIO ---
+
+// CUANDO SE REALIZA EL ENVIO DEL FORMULARIO SE LLAMA A LA FUNCION BUSQUEDA
 formularioHeader.addEventListener("submit", (event) => {
     event.preventDefault();
-    Search(inputSearch.value);
+    busquedaProducto(inputSearch.value);
 });
+//---------------------------------------------------------------------------------------------------------------------
 
-// --- EVENTO GLOBAL PARA BOTONES ADD TO CART ---
+
+
+
+// EVENTO GLOBAL PARA QUE TODOS LOS BOTONES ADD TO CART FUNCIONEN AGREGANDO EL PRODUCTO AL CARRITO
 document.addEventListener('click', (e) => {
     if (e.target && e.target.classList.contains('btnAgregarCarrito')) {
         const nombre = e.target.dataset.nombre;
@@ -396,27 +342,99 @@ document.addEventListener('click', (e) => {
         agregarAlCarrito(nombre, precio);
     }
 });
+//---------------------------------------------------------------------------------------------------------------------
 
-// --- MOSTRAR PRODUCTOS RANDOM EN HOME ---
-// async function Bring() {
-//     const page = Math.floor(Math.random() * (6 - 1 + 1)) + 1;
 
-//     fetch(`https://dragonball-api.com/api/characters?page=${page}&limit=4`)
-//         .then(response => response.json())
-//         .then(data => {
-//             contenedorProductosPops.innerHTML = "";
-//             data.items.forEach(personaje => {
-//                 contenedorProductosPops.innerHTML += crearCard(personaje);
-//             });
-//         })
-//         .catch(error => console.error('Error fetching data:', error));
-// }
+//RENDERIZO EL CARRITO CADA 2 SEGS PARA QUE AL AGREGAR UN PRODUCTO DESDE OTRO ARHCHIVO HTML SE VEA REFLEJADO AL INSTANTE Y NO SOLO CUANDO SE RECARGUE LA PAGINA
+setInterval(renderizarCarrito, 2000);
+//---------------------------------------------------------------------------------------------------------------------
 
-// --- AL CARGAR LA PAGINA ---
+
+// AL CARGAR LA PAGINA TRAIGO LOS PRODUCTOS POPULARES Y MUESTRO LO QUE EL CARRITO TENGA GUARDADO
 document.addEventListener('DOMContentLoaded', () => {
-    Bring();           // cargar productos aleatorios
-    renderizarCarrito(); // cargar carrito guardado
+    traerProductosPopulares();
+    renderizarCarrito();
+});
+//---------------------------------------------------------------------------------------------------------------------
+
+// MANEJO EL SIMULADOR DE PAGO
+document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('modal');
+    const btnCerrar = document.getElementById('btnCerrarModalPago');
+    const btnPagar = document.getElementById('btnPagar');
+    const tarjetaForm = document.getElementById('tarjetaForm');
+    const procesoPago = document.getElementById('procesoPago');
+    const resultadoPago = document.getElementById('resultadoPago');
+    const mensajePago = document.getElementById('mensajePago');
+    const imagenPago = document.getElementById('imagenPago');
+    const imagenSpinner = document.getElementById('imagenSpinner');
+    const btnFinalizarCompra = document.getElementById('finalizarCompra');
+
+    function abrirModalPago() {
+        modal.classList.add('visible');
+        
+        tarjetaForm.style.display = 'block';
+        procesoPago.style.display = 'none';
+        resultadoPago.style.display = 'none';
+    }
+
+    function cerrarModal() {
+        modal.classList.remove('visible');
+    }
+
+    btnFinalizarCompra.addEventListener('click',()=>{
+        let productosGuardados = JSON.parse(localStorage.getItem("productosDragonBall")) || [];
+        if (productosGuardados.length === 0) {
+            alert("Upps! Para finalizar la compra, debes tener productos en el carrito.");
+        } else {
+            abrirModalPago();
+            carritoContainer.style.display = 'none';
+        }
+
+    });
+
+    btnCerrar.addEventListener('click', cerrarModal);
+
+    window.addEventListener('click', (event) => {
+        if (event.target === modal) {
+            cerrarModal();
+        }
+    });
+
+    btnPagar.addEventListener('click', () => {
+        const numeroTarjeta = document.getElementById('numero-tarjeta').value;
+        const nombreTarjeta = document.getElementById('nombre-tarjeta').value;
+        const codSeguridad = document.getElementById('cvv').value;
+        if (numeroTarjeta.length < 16 || nombreTarjeta === '' || codSeguridad ==='' || codSeguridad.length < 3) {
+            alert('Por favor, completa todos los campos.');
+            return;
+        }
+
+        tarjetaForm.style.display = 'none';
+        procesoPago.style.display = 'block';
+
+        imagenSpinner.src = 'https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExbG55cXk1dDMzanRzZzdtYXRxZTI2NG12Z3A1aGE0MXpiMGNxNzBkdiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/d5fMI9ftgQiGzoZoB9/giphy.gif';
+
+        // SIMULA TIEMPO DE ESPERAR PARA QUE SE REALICE EL PAGO
+        setTimeout(() => {
+            const pagoExitoso = Math.random() < 0.8; // PERMITE TENER UN 80% DE POSIBLIDAD DE QUE EL PAGO SE REALICE DEJANDO UN 20% DE FALLO PARA DAR CIERTO REALISMO
+            procesoPago.style.display = 'none';
+            resultadoPago.style.display = 'block';
+            
+
+            if (pagoExitoso) {
+                mensajePago.textContent = '¡Pago Exitoso!';
+                mensajePago.style.color = 'green';
+                imagenPago.src = 'https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExYWpxcWNsd3M5anpoazBsZnI2NXBjZDl3eTM3am43cmp6dnA1YjB3biZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WUDGo9jYZzVt3DExhi/giphy.gif';
+                localStorage.setItem("productosDragonBall", JSON.stringify([]));
+                renderizarCarrito();
+            } else {
+                mensajePago.textContent = '¡Pago Fallido!';
+                mensajePago.style.color = 'red';
+                imagenPago.src = 'https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExMmZxNWZtdHBtbGk1dmx0dndndDFlaGJzbjQ5bjh1b3E3MjVqd3ZsaiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/yN1ggBGncgAW4/giphy.gif';
+            }
+        }, 5050);
+    });
 });
 
-
-
+//--------------------------------------------------------------------------------------------------------------------------

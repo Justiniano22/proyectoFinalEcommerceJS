@@ -1,146 +1,196 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="./styles.css">
-    <title>Document</title>
+    <title>Dragon Ball Ecommerce</title>
 </head>
 <body>
 
 
     <header>
         <button id="btnAbrirMenuHamburguesa" class="abrirMenu"><i class="bi bi-list"></i></button>
-        <h2>Ecommerce</h2>
+        <h2>DBZSTORE</h2>
         <nav id="navId" class="navHeader nav">
             <button id="btnCerrarMenuHamburguesa" class="btnCerrarHamburguer"><i class="bi bi-x"></i></button>
-
-            
             <ul class="listaNav">
-                <li><a href="#sectionHome">Home</a></li>
-                <li><a href="#sectionShop">Shop</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="#sectionHome">Inicio</a></li>
+                <li><a href="#sectionShop">Tienda</a></li>
+                <li><a href="#sectionPublicarProducto">Publicar</a></li>
+                <li><a href="#footer">Nosotros</a></li>
+                <li><a href="#footer">Contacto</a></li>
             </ul>
         </nav>
         <form id="formularioHeader" class="formularioHeader" action="submit">
-                <input id="inputSearch" class="inputBusqueda" type="text" name="name" placeholder="Ingrese su busqueda" required>
+                <input id="inputSearch" class="inputBusqueda" type="text" name="name" placeholder="Buscar Producto" required>
                 <button id="btnSearch" class="btnBusqueda" type="submit"><i class="bi bi-search"></i></button>
         </form>
         <button id="btnMostrarCarrito" class="bntCarrito"><i class="bi bi-cart"></i></button>
     </header>
 
+    <article class="articleCarrito">
+        <div id="carrito-container" class="carritoContainer">
+            <button id="btnCerrarCarrito" class="btnCerrarCarrito">X</button>
+            <div class="">
+                <h2 class="">Tu Carrito</h2>
+            </div>
+            <form id="cupon-form" class=""></form>
+            <div class="carrito-body" id="carrito-body"></div>
+            <div class="">
+                <p id="carrito-total">Total: $0</p>
+            </div>
+            <button id="finalizarCompra" class="">
+                Finalizar Compra
+            </button>
+        </div>
+    </article>
+
 
     <main>
-        
         <section id="sectionHome" class="sectionHome">
             <div id="result" class="mostrarResultadoBusqueda"></div>
             <div class="contenedorImagenSectionHome">
                 <aside>
-                    <p>DISCOVER</p>
-                    <p>AMAZING</p>
-                    <p>PRODUCTS</p>
-                    <button>Shop Now</button>
+                    <p>DESCUBRE</p>
+                    <p>PRODUCTOS</p>
+                    <p>INCREIBLES</p>
                 </aside>
             </div>
         </section>
 
-        <article class="articleCarrito">
-            <div id="carrito-container" class="carritoContainer">
-                <button id="btnCerrarCarrito" class="btnCerrarCarrito">X</button>
-                <div class="">
-                    <h2 class="">Tu Carrito</h2>
-                </div>
-                <form id="cupon-form" class="">
-                    <!-- <input
-                    type="text"
-                    disabled
-                    id="cupon-input"
-                    placeholder="Ingrese el cupon"
-                    class=""
-                    />
-                    <button
-                    type="submit"
-                    id="aplicar-cupon"
-                    class=""
-                    > 
-                    Aplicar cupón
-                    </button>-->
-                </form>
-                <div class="carrito-body" id="carrito-body"></div>
-                <div class="">
-                    <p id="carrito-total">Total: $0</p>
-                </div>
-                <button
-                    id="finalizar-compra"
-                    class=""
-                >
-                    Finalizar Compra
-                </button>
-            </div>
-        </article>
-
         
         
         <section id="sectionShop" class="sectionMenuStore">
-            <h2>Categories</h2>
+            <h2>Categorias</h2>
             <div class="contenedorCategoriasStore">
                 <div class="cardCategoria">
-                    <a href="#"><img src="./media/Luffy4.png" alt="FOTO CATEGORIA FIGURAS"></a>
+                    <a href="./apartadoFiguras/figurasProducto.html" target="_blank"><img src="https://cdn.jsdelivr.net/gh/Justiniano22/RepositorioMultimediaEcommerceDBZJustiniano@main/media/imagenFigura.webp" alt="FOTO CATEGORIA FIGURAS"></a>
                     <h3>Figuras</h3>
                 </div>
                 <div class="cardCategoria">
-                    <a href="#"><img src="./media/Luffy4.png" alt="FOTO CATEGORIA MANGA"></a>
+                    <a href="./apartadoManga/mangaProducto.html" target="_blank"><img src="https://cdn.jsdelivr.net/gh/Justiniano22/RepositorioMultimediaEcommerceDBZJustiniano@main/media/imagenManga.webp" alt="FOTO CATEGORIA MANGA"></a>
                     <h3>Manga</h3>
-                </div>
-                <div class="cardCategoria">
-                    <a href="#"><img src="./media/Luffy4.png" alt="FOTO CATEGORIA ANIME"></a>
-                    <h3>Anime</h3>                    
                 </div>
             </div>
 
             <h2>Productos Populares</h2>
             <div id="contenedorProductosPops" class="contenedorProductosPopulares">
-
-                <!-- <div class="cardProductoPopular">                   
-                    <img src="./media/Luffy4.png" alt="">
-                    <div>
-                        <h3>Name Product</h3>
-                        <p>$$$</p>
-                        <button>Add to cart</button>
-                    </div>
-                </div>
-
-                <div class="cardProductoPopular">                    
-                    <img src="./media/Luffy4.png" alt="">
-                    <div>
-                        <h3>Name Product</h3>
-                        <p>$$$</p>
-                        <button>Add to cart</button>
-                    </div>
-                </div>
-                <div class="cardProductoPopular">                    
-                    <img src="./media/Luffy4.png" alt="">
-                    <div>
-                        <h3>Name Product</h3>
-                        <p>$$$</p>
-                        <button>Add to cart</button>
-                    </div>
-                </div>
-                <div class="cardProductoPopular">                     
-                    <img src="./media/Luffy4.png" alt="">
-                    <div>
-                        <h3>Name Product</h3>
-                        <p>$$$</p>
-                        <button>Add to cart</button>
-                    </div>
-                </div> -->
             </div>
         </section>
 
-        <footer></footer>
+        <section id="sectionPublicarProducto" class="sectionPublicarProducto">
+            <h2>Publicar tu producto</h2>
+            <div class="contenedorPublicacion">
+                <form id="productoForm" class="productoFormulario">
+                    <label for="productoName">Nombre del Producto:</label>
+                    <input type="text" id="productoName" placeholder="Nombre" required>
+
+                    <label for="productoDesc">Descripción:</label>
+                    <textarea id="productoDesc" placeholder="Descripción" required></textarea>
+
+                    <label for="productoPrice">Precio:</label>
+                    <input type="number" id="productoPrice" placeholder="Precio $XXX" required>
+
+                    <label for="productoImage">URL de la Imagen:</label>
+                    <input type="url" id="productoImage" list="image-options" placeholder="Url" required>
+                    
+                    <datalist id="image-options">
+                        <option value="https://cdn.jsdelivr.net/gh/Justiniano22/RepositorioMultimediaEcommerceDBZJustiniano@main/media/DragonBallTodoLosPersonajes.webp">Personajes Historicos DBZ</option>
+                        <option value="https://cdn.jsdelivr.net/gh/Justiniano22/RepositorioMultimediaEcommerceDBZJustiniano@main/media/GokuChiquito.webp">Goku Chiquito</option>
+                        <option value="https://cdn.jsdelivr.net/gh/Justiniano22/RepositorioMultimediaEcommerceDBZJustiniano@main/media/GokuYGohan.webp">Goku y Gohan</option>
+                        <option value="https://cdn.jsdelivr.net/gh/Justiniano22/RepositorioMultimediaEcommerceDBZJustiniano@main/media/Gogeta.webp">Gogeta</option>
+                    </datalist>
+
+                    <button type="submit" id="submitBtn">Crear Producto</button>
+                </form>
+                <div id="contenedorProductoCreado" class="contenedorProductoCreado"></div>                
+            </div>
+        </section>
+
+            <!-- MODAL (FUNCIONA A TRAVES DE JAVASCRIPT) -->
+            <div id="modal" class="modal">
+                <div class="modal-contenido">
+                    <span id="btnCerrarModalPago" class="cerrar">&times;</span>
+                    <h2 id="modal-titulo"></h2>
+                    <div id="tarjetaForm" class="tarjetaFormulario">
+                        <div class="inputGrupo">
+                            <label for="numero-tarjeta">Número de Tarjeta</label>
+                            <input type="text"  maxlength="16" id="numero-tarjeta" onKeypress=" if (!(event.charCode >= 48 && event.charCode <= 57)) event.preventDefault()" placeholder="XXXX-XXXX-XXXX-XXXX" required>
+                        </div>
+                        <div class="inputGrupo">
+                            <label for="nombre-tarjeta">Nombre en la Tarjeta</label>
+                            <input type="text" id="nombre-tarjeta" placeholder="Goku" required>
+                        </div>
+                        <div class="inputGrupoDoble">
+                            <div class="inputGrupo">
+                                <label for="expiracion">Fecha de Expiración</label>
+                                <select>
+                                    <option value="01">01/26</option>
+                                    <option value="02">04/26</option>
+                                    <option value="03">07/27</option>
+                                    <option value="04">10/28</option>
+                                    <option value="05">03/29</option>
+                                    <option value="06">06/30</option>
+                                    <option value="07">09/31</option>
+                                    <option value="08">12/32</option>
+                                    <option value="09">02/33</option>
+                                    <option value="10">05/34</option>
+                                    <option value="11">08/35</option>
+                                    <option value="12">11/36</option>
+                                </select>
+
+                            </div>
+                            <div class="inputGrupo">
+                                <label for="cvv">CVV</label>
+                                <input type="text"  maxlength="3" onKeypress=" if (!(event.charCode >= 48 && event.charCode <= 57)) event.preventDefault()" id="cvv" placeholder="123" required>
+                            </div>
+                        </div>
+                        <button id="btnPagar" class="btnPagar">Pagar Ahora</button>
+                    </div>
+                    <div id="procesoPago" class="contenedorProcesoPago" style="display: none;">
+                        <div class="spinner"></div>
+                        <img id="imagenSpinner" class="imagenSpinner" src="" alt="Imagen de espera">
+                        <p>Procesando tu pago... No cierres esta ventana.</p>
+                    </div>
+                    <div id="resultadoPago" class="contenedorPago">
+                        <p id="mensajePago" class="mensajePago"></p>
+                        <img id="imagenPago" class="imagenPago" src="" alt="Resultado del pago">
+                    </div>
+                </div>
+            </div>
+
+        <footer id="footer">
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h4>Acerca de Nosotros</h4>
+                    <p>Somos una tienda en línea dedicada a los fanáticos de Dragon Ball, ofreciendo productos de alta calidad y coleccionables únicos.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="#sectionHome">Inicio</a></li>
+                        <li><a href="#sectionShop">Tienda</a></li>
+                        <li><a href="#sectionPublicarProducto">Publicar Producto</a></li>
+                        <li><a href="#">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Síguenos</h4>
+                    <div class="social-icons">
+                        <a href="https://www.instagram.com/" target="_blank"><i class="bi bi-instagram"></i></a>
+                        <a href="https://www.facebook.com/" target="_blank"><i class="bi bi-facebook"></i></a>
+                        <a href="https://x.com/?lang=es" target="_blank"><i class="bi bi-twitter"></i></a>
+                        <a href="https://www.youtube.com/" target="_blank"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 EcommerceDBZ. Todos los derechos reservados.</p>
+            </div>
+        </footer>
     </main>
 
     <script src="./index.js"></script>
